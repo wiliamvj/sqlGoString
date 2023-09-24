@@ -10,7 +10,7 @@ import (
 )
 
 var (
-  TAG = "--transform: "
+  tag = "--transform: "
 )
 
 func scanSQLFiles() ([]string, error) {
@@ -52,7 +52,7 @@ func transformSQLFiles(queryName string, sqlFiles []string) (string, error) {
     for scanner.Scan() {
       line := scanner.Text()
 
-      if strings.Contains(line, TAG+queryName) {
+      if strings.Contains(line, tag+queryName) {
         isTransformBlock = true
       } else if isTransformBlock && line == "" {
         isTransformBlock = false
