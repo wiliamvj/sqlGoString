@@ -6,6 +6,7 @@ import (
   "fmt"
   "os"
   "path/filepath"
+  "regexp"
   "strings"
 )
 
@@ -27,7 +28,7 @@ func scanSQLFiles() ([]string, error) {
   })
 
   if err != nil {
-    return nil, fmt.Errorf("Erro ao ler os arquivos: %v", err)
+    return nil, fmt.Errorf("Error for read files: %v", err)
   }
 
   return sqlFiles, nil
@@ -51,8 +52,10 @@ func transformSQLFiles(queryName string, sqlFiles []string) (string, error) {
 
     for scanner.Scan() {
       line := scanner.Text()
+      pattern := fmt.Sprintf("\\b%s\\b", queryName)
+      existsInLine, _ := regexp.MatchString(pattern, line)
 
-      if strings.Contains(line, tag+queryName) {
+      if existsInLine {
         isTransformBlock = true
       } else if isTransformBlock && line == "" {
         isTransformBlock = false
