@@ -25,3 +25,5 @@ db.Query(queryString)
 ```
 sqlGoString will search for any ```.sql``` file and the ```my_query tag```.
 You can have multiple sql files or use all queries in the same file.
+
+[![Go Reference](https://pkg.go.dev/badge/github.com/google/uuid.svg)](https://pkg.go.dev/github.com/wiliamvj/sqlGoString)
